@@ -1,0 +1,19 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  tests:
+    runs-on: ubuntu-last
+    continue-on-error: false
+    steps:
+      - run: npm install -g truffle
+      - run: truffle test

@@ -19,6 +19,7 @@ jobs:
       - run: npm install
       - run: truffle compile
   tests:
+    needs: compile
     runs-on: self-hosted
     continue-on-error: false
     steps:

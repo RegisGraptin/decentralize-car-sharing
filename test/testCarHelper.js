@@ -7,8 +7,8 @@
  *  #> truffle test <path/to/this/test.js>
  * 
  * */
- var CarFactory = artifacts.require("../contracts/CarFactory.sol");
-var CarHelper = artifacts.require("/home/rere/Project/Crypto/Car/contracts/CarHelper.sol");
+var CarFactory = artifacts.require("../contracts/CarFactory.sol");
+var CarHelper = artifacts.require("../contracts/CarHelper.sol");
 
 contract('CarHelper', (accounts) => {
     var creatorAddress = accounts[0];

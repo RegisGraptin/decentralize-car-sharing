@@ -1,5 +1,31 @@
 {
   "dependencies": {
     "openzeppelin-solidity": "^4.6.0"
-  }
+  },
+  "name": "car",
+  "description": "Create a decentralize car sharing protocol. This project will allow a company or a person to share his car to another entity.",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rere-rere/decentralize-car-sharing.git"
+  },
+  "keywords": [
+    "carsharing",
+    "blockchain"
+  ],
+  "author": "Régis Graptin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rere-rere/decentralize-car-sharing/issues"
+  },
+  "homepage": "https://github.com/rere-rere/decentralize-car-sharing#readme"
 }

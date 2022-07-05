@@ -5,6 +5,8 @@ import "./Route.sol";
 
 contract Rent {
 
+    event NewRentProposition(uint rentId, address owner, address client);
+
     event ProposedRent(address proposer);
     event ApproveRent(address proposer);
     event LockContract(address proposer);
@@ -25,8 +27,8 @@ contract Rent {
 
     RentContract[] public rentContract;
 
-    mapping (uint => address) rentToOwner;
-    mapping (uint => address) rentToClient;
+    mapping (uint => address) public rentToOwner;
+    mapping (uint => address) public rentToClient;
 
     /**
      * Create a new rent proposition.
@@ -44,6 +46,9 @@ contract Rent {
         // Links the contract id to the client and the owner
         rentToClient[_id] = client;
         rentToOwner[_id]  = carOwner;
+
+        // Create an event for the created rent
+        emit NewRentProposition(_id, carOwner, client);
     }
 
 

@@ -2,13 +2,21 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./Route.sol";
+import "./CarFactory.sol";
 
 contract Rent {
 
+    CarFactory carFactory;
+
+    constructor(address addr) {
+        carFactory = CarFactory(addr);
+    }
+
+
     event NewRentProposition(uint rentId, address owner, address client);
 
-    event ProposedRent(address proposer);
-    event ApproveRent(address proposer);
+    event ProposedRent(uint rentId, address proposer);
+    event ApproveRent(uint rentId, address proposer);
     event LockContract(address proposer);
 
     struct RentContract {
@@ -20,8 +28,8 @@ contract Rent {
 
         Route route;
 
-        bool approvedByOwner;
         bool approvedByClient;
+        bool approvedByOwner;
         bool locked;
     }
 
@@ -37,9 +45,16 @@ contract Rent {
         // Only the client can request a rent contract
         require(msg.sender == client);
 
+        // Check the address of the car owner
+        require(carFactory.carToOwner(carId) == carOwner);
+
+
+        // TODO :: Verify the carOwner and the carId (should be the same)
+        // TODO :: The client should have accepeted before hand the contract, only the owner need to accept/modify/reject the offer.
+
         // Add the contract
         rentContract.push(
-            RentContract(carOwner, client, carId, price, route, false, false, false)
+            RentContract(carOwner, client, carId, price, route, true, false, false)
         );
         uint _id = rentContract.length - 1;
 
@@ -73,9 +88,9 @@ contract Rent {
         }
 
         if (rentContract[rentContractId].approvedByOwner && rentContract[rentContractId].approvedByClient) {
-            emit ApproveRent(msg.sender);
+            emit ApproveRent(rentContractId, msg.sender);
         } else {
-            emit ProposedRent(msg.sender);
+            emit ProposedRent(rentContractId, msg.sender);
         }
     }
 

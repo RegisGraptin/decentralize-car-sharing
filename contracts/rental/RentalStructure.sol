@@ -1,16 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "./Route.sol";
-import "./CarFactory.sol";
+import "../Route.sol";
+import "../CarFactory.sol";
 
-contract Rent {
+abstract contract RentalStructure {
 
+    /**
+     * Indicate the state of the contract
+     */
+    enum RentalContractState {
+        Proposed,
+        Canceled,
+        Booked,
+        Rented,
+        Returned
+    }
+
+    /**
+     * Car Factory contract.
+     */
     CarFactory carFactory;
 
-    constructor(address addr) {
-        carFactory = CarFactory(addr);
-    }
 
 
     event NewRentProposition(uint rentId, address owner, address client);
@@ -26,12 +37,29 @@ contract Rent {
 
         uint price;
 
+        uint bookedDate;
+
         Route route;
 
         bool approvedByClient;
         bool approvedByOwner;
-        bool locked;
+
+        RentalContractState state;
+
+        
     }
+
+    /**
+     * Only the owner of the car or the client can execute the function.
+     */
+    modifier onlyParticipant (uint rentContractId) {
+        require(msg.sender == rentContract[rentContractId].carOwner 
+            || msg.sender == rentContract[rentContractId].client,
+            "Only the client or the owner of the car can call this function."
+        );
+        _;
+    }
+
 
     RentContract[] public rentContract;
 
@@ -49,12 +77,11 @@ contract Rent {
         require(carFactory.carToOwner(carId) == carOwner);
 
 
-        // TODO :: Verify the carOwner and the carId (should be the same)
         // TODO :: The client should have accepeted before hand the contract, only the owner need to accept/modify/reject the offer.
 
         // Add the contract
         rentContract.push(
-            RentContract(carOwner, client, carId, price, route, true, false, false)
+            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed)
         );
         uint _id = rentContract.length - 1;
 
@@ -77,7 +104,7 @@ contract Rent {
      */
     function approved(uint rentContractId) public {
         require(msg.sender == rentContract[rentContractId].carOwner || msg.sender == rentContract[rentContractId].client);
-        require(! rentContract[rentContractId].locked);
+        require(rentContract[rentContractId].state == RentalContractState.Proposed);
 
         if (msg.sender == rentContract[rentContractId].carOwner) {
             rentContract[rentContractId].approvedByOwner = true;
@@ -99,12 +126,22 @@ contract Rent {
      */
     function validate(uint rentContractId) public {
         require(msg.sender == rentContract[rentContractId].carOwner || msg.sender == rentContract[rentContractId].client);
+        require(rentContract[rentContractId].state == RentalContractState.Proposed);
 
         if (rentContract[rentContractId].approvedByClient && rentContract[rentContractId].approvedByOwner) {
-            rentContract[rentContractId].locked = true;
+            rentContract[rentContractId].state = RentalContractState.Booked;
+            rentContract[rentContractId].bookedDate = block.timestamp;
             emit LockContract(msg.sender);
         }
+    }
 
+    /**
+     * Reject a contract.
+     */
+    function reject(uint rentContractId) public {
+        require(msg.sender == rentContract[rentContractId].carOwner || msg.sender == rentContract[rentContractId].client);
+        require(rentContract[rentContractId].state == RentalContractState.Proposed);
+        rentContract[rentContractId].state = RentalContractState.Canceled;
     }
 
 }

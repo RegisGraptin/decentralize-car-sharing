@@ -7,7 +7,7 @@
  *  #> truffle test <path/to/this/test.js>
  * 
  * */
-var Rent = artifacts.require("../contracts/Rent.sol");
+var Rent = artifacts.require("../contracts/rental/RentalContract.sol");
 var CarFactory = artifacts.require("../contracts/CarFactory.sol");
 
 
@@ -113,13 +113,19 @@ contract('Rent', (accounts) => {
             assert.equal(createdRent[1], client);
             assert.equal(createdRent[2], carId);
             assert.equal(createdRent[3], price);
-            assert.equal(createdRent[4][0], latitude);
-            assert.equal(createdRent[4][1], longitude);
-            assert.equal(createdRent[4][2], starting_date);
-            assert.equal(createdRent[4][3], ending_date);
-            assert.isTrue(createdRent[5]);
-            assert.isFalse(createdRent[6]);
+            
+            // Correspond to the timestamps of the booked rental (should be at the creation equals to 0)
+            assert.equal(createdRent[4], 0);
+
+            assert.equal(createdRent[5][0], latitude);
+            assert.equal(createdRent[5][1], longitude);
+            assert.equal(createdRent[5][2], starting_date);
+            assert.equal(createdRent[5][3], ending_date);
+            
+            assert.isTrue(createdRent[6]);
             assert.isFalse(createdRent[7]);
+            
+            assert.equal(createdRent[8], 0);
 
         })
 

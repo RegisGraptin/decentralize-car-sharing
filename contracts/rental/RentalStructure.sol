@@ -38,6 +38,11 @@ abstract contract RentalStructure {
 
         RentalContractState state;
 
+
+        // TODO :: Reorganize variables + modify the test 
+        bool acceptRentClient;
+        bool acceptRentOwner;
+
         
     }
 

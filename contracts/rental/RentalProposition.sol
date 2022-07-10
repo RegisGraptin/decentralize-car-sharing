@@ -24,12 +24,14 @@ abstract contract RentalProposition is RentalStructure {
         // Check the address of the car owner
         require(carFactory.carToOwner(carId) == carOwner);
 
+        // TODO :: Check using the Verifier that the owner/car/client are valid.
+
 
         // TODO :: The client should have accepeted before hand the contract, only the owner need to accept/modify/reject the offer.
 
         // Add the contract
         rentContract.push(
-            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed)
+            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed, false, false)
         );
         uint _id = rentContract.length - 1;
 

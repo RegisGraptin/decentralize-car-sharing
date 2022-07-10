@@ -43,6 +43,9 @@ abstract contract RentalStructure {
         bool acceptRentClient;
         bool acceptRentOwner;
 
+        bool returnCarOwner;
+        bool returnCarClient;
+
         
     }
 

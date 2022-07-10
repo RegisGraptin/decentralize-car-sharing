@@ -31,7 +31,7 @@ abstract contract RentalProposition is RentalStructure {
 
         // Add the contract
         rentContract.push(
-            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed, false, false)
+            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed, false, false, false, false)
         );
         uint _id = rentContract.length - 1;
 

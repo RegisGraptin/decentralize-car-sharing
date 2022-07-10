@@ -46,6 +46,8 @@ abstract contract RentalReservation is RentalProposition {
         if (rentContract[rentContractId].acceptRentOwner && rentContract[rentContractId].acceptRentClient) {
             rentContract[rentContractId].state = RentalContractState.Rented;
 
+            // TODO :: Save the time of the validation of the two parties ?
+
             emit RentalReservationStart(rentContractId, rentContract[rentContractId].carOwner, rentContract[rentContractId].client);
         }
 

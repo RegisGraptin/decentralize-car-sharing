@@ -22,6 +22,21 @@ abstract contract RentalStructure {
      */
     CarFactory carFactory;
 
+    struct AcceptTwoParties {
+        bool clientAccept;
+        bool ownerAccept;
+    }
+
+    struct ProofOfExchange {
+        // TODO :: Add the possibility to store timestamps
+
+        bool clientAcceptExchange;
+        bool ownerAcceptExchange;
+
+        bytes32 ownerSecretRentCar;
+        bytes32 clientSecretRentCar;
+    }
+
     struct RentContract {
         address carOwner;
         address client;
@@ -40,13 +55,15 @@ abstract contract RentalStructure {
 
 
         // TODO :: Reorganize variables + modify the test 
-        bool acceptRentClient;
-        bool acceptRentOwner;
+        
 
         bool returnCarOwner;
         bool returnCarClient;
 
-        
+        // TODO :: remplace the two boolean variables
+        AcceptTwoParties bookProposition;
+
+        ProofOfExchange proofOfExchange;
     }
 
     /**

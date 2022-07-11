@@ -29,21 +29,29 @@ abstract contract RentalReservation is RentalProposition {
     /// @param rentContractId id of the contract
     /// @custom:future At the moment, we set it using two booleans. In future version, we should maybe 
     /// send a secret that the two participants need to share in real time to accept the contract.
-    function exchange(uint rentContractId) public onlyParticipant(rentContractId) {
+    function exchange(uint rentContractId, bytes memory secret) public onlyParticipant(rentContractId) {
         require(rentContract[rentContractId].state == RentalContractState.Booked);
 
         // The owner accept the exchange
         if (rentContract[rentContractId].carOwner == msg.sender) {
-            rentContract[rentContractId].acceptRentOwner = true;
+            // Generate the hash of the secret
+            bytes32 secret_hash = sha256(secret);
+            if (rentContract[rentContractId].proofOfExchange.clientSecretRentCar == secret_hash) {
+                rentContract[rentContractId].proofOfExchange.ownerAcceptExchange = true;
+            }            
         } 
 
         // The client accept the exchange
         if (rentContract[rentContractId].client == msg.sender) {
-            rentContract[rentContractId].acceptRentClient = true;
+            bytes32 secret_hash = sha256(secret);
+            if (rentContract[rentContractId].proofOfExchange.ownerSecretRentCar == secret_hash) {
+                rentContract[rentContractId].proofOfExchange.clientAcceptExchange = true;
+            }
         }
 
         // The two parties have agreed
-        if (rentContract[rentContractId].acceptRentOwner && rentContract[rentContractId].acceptRentClient) {
+        if (rentContract[rentContractId].proofOfExchange.ownerAcceptExchange 
+            && rentContract[rentContractId].proofOfExchange.clientAcceptExchange) {
             rentContract[rentContractId].state = RentalContractState.Rented;
 
             // TODO :: Save the time of the validation of the two parties ?

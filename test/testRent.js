@@ -7,6 +7,8 @@
  *  #> truffle test <path/to/this/test.js>
  * 
  * */
+var Web3 = require('web3');
+
 var Rent = artifacts.require("../contracts/rental/RentalContract.sol");
 var CarFactory = artifacts.require("../contracts/CarFactory.sol");
 
@@ -182,7 +184,11 @@ contract('Rent', (accounts) => {
         })
 
         it('checks the approval of the owner', async () => {
-            let transaction = await rent.approved(rentId, { from: carOwnerAddress })
+
+            // TODO :: Define a encrypted secret
+            let secret = Web3.utils.asciiToHex("999 859 487");
+
+            let transaction = await rent.approved(rentId, secret, { from: carOwnerAddress });
 
             // Verify that we receive the transaction
             assert.isTrue(transaction.receipt.status);

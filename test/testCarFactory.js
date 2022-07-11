@@ -63,7 +63,11 @@ contract('CarFactory', (accounts) => {
             assert.isTrue(transaction.receipt.status);
             assert.equal(transaction.logs[0].event, "NewCar");
             assert.equal(transaction.logs[0].args.name, "Renault Twingo");
+
+            // TODO :: Verify the logs obtained (name + carId)
         })
+
+        // TODO :: Check the owner of the car
 
     })
 });

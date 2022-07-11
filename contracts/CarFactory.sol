@@ -3,6 +3,17 @@ pragma solidity >=0.4.22 <0.9.0;
 
 contract CarFactory {
 
+    // TODO :: Rename CarFactory to Car
+
+    enum State {
+        NotAvailable,
+        Available, 
+        Request,
+        Booked,
+        Rent,
+        Return
+    }
+
     event NewCar(uint carId, string name);
 
     struct Car {
@@ -24,8 +35,8 @@ contract CarFactory {
 
     Car[] public cars;
 
-    mapping (uint => address) carToOwner;
-    mapping (address => uint) ownerCarCount;
+    mapping (uint => address) public carToOwner;
+    mapping (address => uint) public ownerCarCount;
 
     function createCar(
         string memory _name, 

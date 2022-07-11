@@ -11,9 +11,20 @@ on:
       - "*"
 
 jobs:
-  tests:
-    runs-on: ubuntu-last
+  compile:
+    runs-on: self-hosted
     continue-on-error: false
     steps:
+      - uses: actions/checkout@v3
       - run: npm install -g truffle
+      - run: npm install
+      - run: truffle compile
+  tests:
+    needs: compile
+    runs-on: self-hosted
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install -g truffle
+      - run: npm install
       - run: truffle test

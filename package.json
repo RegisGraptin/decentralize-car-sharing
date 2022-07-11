@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "openzeppelin-solidity": "^4.6.0"
+    "openzeppelin-solidity": "^4.6.0",
+    "web3": "^0.20.7"
   },
   "name": "car",
   "description": "Create a decentralize car sharing protocol. This project will allow a company or a person to share his car to another entity.",
@@ -10,7 +11,6 @@
     "doc": "doc",
     "test": "test"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "truffle test"
   },

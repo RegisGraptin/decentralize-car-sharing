@@ -88,13 +88,16 @@ module.exports = {
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
+          runs: 2000,
           enabled: true,
-          runs: 200
+          details: {
+            yul: true
+          }
         },
       //  evmVersion: "byzantium"
       }
-    }
-  },
+    },
+  },  
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:
   // false to enabled: true. The default storage location can also be

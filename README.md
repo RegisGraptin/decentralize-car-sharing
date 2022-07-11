@@ -1,64 +1,10 @@
 
 # Decentralize car sharing system
 
-Create a decentralize car sharing protocol.
-This project will allow a company or a person to share his car to another entity. 
+Cars allow us to move easily for more or less long trips. However, a large part of a car's life is spent parked in one place. With increasing problems such as population growth, energy or even environmental issues, we are reaching a stage where owning a car will become more and more complciated. Indeed, building a car requires a large amount of material. Additionally, as cities becoming denser and denser, it is becoming more and more difficult to find a place to park your car. This generates additional costs for a low usage.
 
-This project is a proof of concept (POC) for learning and implementing solidity contract.
+This is where car sharing comes. The idea is to rent your car, when you do not need it. From the owner's perspective, it generates additional income, knowing that your car generates costs by staying parked (insurance, parking space...). From the user's perspective, it allows you to rent a car at low cost, without having the constraints of owning a car (where to park my car, maintenance of the car that I do not use...). Car sharing will be at the heart of tomorrow's issues. 
 
-[Warning] : This project is at his start, the project can evolve through the development process.
+Through the car rental, we wish to put in relation two people, one wishing to rent a car, the other wishing to rent it. Thus a contract must be created to ensure that the exchange take place during a given period. This is where the blockchain comes in. Indeed, it allows the creation of a contract between two parties in a decentralized way. The decentralization allows the simplification of the connection, the creation of the contract, but also to be transparent on the additional costs related to this exchange.
 
-
-## User approach
-
-- See the list of cars available.
-- Request for a car. (Send information)
-- Pending : (Owner => Accept/Reject of another person)
-- Deposit of a guarantee.
-- Get the car.
-- Do his trip.
-- Return of the car.
-
-
-## Owner car 
-
-- Send information of the car.
-- Send information of the availability of the car.
-- Accept/Reject car demand.
-- Verification of the car before & after.
-
-
-
-## Questions / Problems 
-
-- How do we verify the state of the car before & after in a decentralize way ?
-- How can we trust the two parts ? Central authority that verify and manage the conflicts ?
-- How can we trust the information during the process (user/car/owner informations) ?
-- How do we manage unexpected events ? 
-  - Delay of the car ? And other reservation ?
-  - Accident ?
-  - Car cancel by the owner / client ?
-
-
-
-
-## Personal notes
-
-> https://www.quicknode.com/guides/web3-sdks/how-to-setup-local-development-environment-for-solidity
-
-```bash
-npm install -g truffle
-truffle init
-
-```
-
-Init successful, sweet!
-
-Try our scaffold commands to get started:
-  $ truffle create contract YourContractName # scaffold a contract
-  $ truffle create test YourTestName         # scaffold a test
-
-http://trufflesuite.com/docs
-
-
-
+Through this project, we propose a decentralized car-sharing system allowing a owner to rent his car and a client to rent it. This project his currently a proof of concept (POC), but do not hesitate to contact me, if you are interested.

@@ -10,6 +10,7 @@
 var Web3 = require('web3');
 
 var Rent = artifacts.require("../contracts/rental/RentalContract.sol");
+var Verifier = artifacts.require("../contracts/Verifier.sol");
 var CarFactory = artifacts.require("../contracts/CarFactory.sol");
 
 
@@ -22,11 +23,16 @@ contract('Rent', (accounts) => {
     var unprivilegedAddress = accounts[4]
 
 
+    let verifier;
     let carFactory;
+
     const carOwnerAddress = firstOwnerAddress;
     let carId;
 
     before(async () => {
+        // Create the Verifier contract
+        verifier = await Verifier.new()
+
         // Create a car for the example
         carFactory = await CarFactory.new()
         var transaction = await carFactory.createCar(
@@ -75,7 +81,7 @@ contract('Rent', (accounts) => {
 
         beforeEach(async () => {
             /* before each tests */
-            rent = await Rent.new(carFactory.address);
+            rent = await Rent.new(verifier.address, carFactory.address);
         })
 
         it('checks creation of a rent contract', async () => {
@@ -159,7 +165,7 @@ contract('Rent', (accounts) => {
         let rentId;
 
         beforeEach(async () => {
-            rent = await Rent.new(carFactory.address);
+            rent = await Rent.new(verifier.address, carFactory.address);
 
             let client = secondOwnerAddress;
             let price = 10;

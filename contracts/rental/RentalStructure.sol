@@ -3,6 +3,7 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "../Route.sol";
 import "../CarFactory.sol";
+import "../Verifier.sol";
 
 abstract contract RentalStructure {
 
@@ -21,6 +22,8 @@ abstract contract RentalStructure {
      * Car Factory contract.
      */
     CarFactory carFactory;
+
+    Verifier verifier;
 
     struct AcceptTwoParties {
         bool clientAccept;

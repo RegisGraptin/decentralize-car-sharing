@@ -8,3 +8,53 @@ This is where car sharing comes. The idea is to rent your car, when you do not n
 Through the car rental, we wish to put in relation two people, one wishing to rent a car, the other wishing to rent it. Thus a contract must be created to ensure that the exchange take place during a given period. This is where the blockchain comes in. Indeed, it allows the creation of a contract between two parties in a decentralized way. The decentralization allows the simplification of the connection, the creation of the contract, but also to be transparent on the additional costs related to this exchange.
 
 Through this project, we propose a decentralized car-sharing system allowing a owner to rent his car and a client to rent it. This project his currently a proof of concept (POC), but do not hesitate to contact me, if you are interested.
+
+## Getting Started
+
+### Installation
+
+First, clone the repository.
+
+```
+git clone https://github.com/rere-rere/decentralize-car-sharing
+cd decentralize-car-sharing
+```
+
+Then, install the dependencies of our project. 
+
+```bash
+npm install -g truffle
+npm install
+```
+
+You are ready to compile and deploy our project.
+
+### Compilation 
+
+```bash
+truffle compile
+```
+
+### Local Deployment
+
+At the current state of this project, we are testing the functionnality of this project. 
+If you want to deploy this project locally, you can first download [ganache](https://trufflesuite.com/ganache/) and run it. You will need to configure the network as follow the `truffle-config.js` file, as defined in the variables `networks` > `localhost`.
+
+Then, you will simply need to run:
+
+```bash
+truffle deploy --network localhost
+```
+
+## Contribution
+
+Any contribution are welcome. If you have suggestion for this project, do not hesite to share your through by opening an issue.
+If you want to contribute to this repository by coding, feel free to fork the repo and create a pull request.
+
+### Testing
+
+A sets of tests are available. Do not hesitate to run them, it is created for that purpose!
+
+```bash
+truffle test
+```

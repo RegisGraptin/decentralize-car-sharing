@@ -26,11 +26,13 @@ abstract contract RentalFinalization is RentalReservation {
         }
 
         // The two parties have agreed
-        if (rentContract[rentContractId].acceptRentOwner && rentContract[rentContractId].acceptRentClient) {
+        // TODO :: Check the variable name 
+        
+        if (rentContract[rentContractId].returnCarOwner && rentContract[rentContractId].returnCarClient) {
             rentContract[rentContractId].state = RentalContractState.Returned;
-
+            
             // TODO :: Save the time of the validation of the two parties ?
-
+            
             emit RentalCarReturn(rentContractId, rentContract[rentContractId].carOwner, rentContract[rentContractId].client);
         }
 

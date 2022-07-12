@@ -31,7 +31,7 @@ abstract contract RentalProposition is RentalStructure {
 
         // Add the contract
         rentContract.push(
-            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed, false, false, false, false)
+            RentContract(carOwner, client, carId, price, 0, route, true, false, RentalContractState.Proposed, false, false, AcceptTwoParties(false, false), ProofOfExchange(false, false, 0, 0))
         );
         uint _id = rentContract.length - 1;
 
@@ -51,17 +51,22 @@ abstract contract RentalProposition is RentalStructure {
      * Require: 
      *  - Only the client or the owner of the car can participate in the negociation.
      *  - The contract do not be locked.
+     *
+     * A secret is store. This will be use as a proof of exhange.
+     *
      */
-    function approved(uint rentContractId) public {
+    function approved(uint rentContractId, bytes32 secret) public {
         require(msg.sender == rentContract[rentContractId].carOwner || msg.sender == rentContract[rentContractId].client);
         require(rentContract[rentContractId].state == RentalContractState.Proposed);
 
         if (msg.sender == rentContract[rentContractId].carOwner) {
             rentContract[rentContractId].approvedByOwner = true;
+            rentContract[rentContractId].proofOfExchange.ownerSecretRentCar = secret;        
         }
 
         if (msg.sender == rentContract[rentContractId].client) {
             rentContract[rentContractId].approvedByClient = true;
+            rentContract[rentContractId].proofOfExchange.clientSecretRentCar = secret;
         }
 
         if (rentContract[rentContractId].approvedByOwner && rentContract[rentContractId].approvedByClient) {

@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "openzeppelin-solidity": "^4.6.0"
+    "openzeppelin-solidity": "^4.6.0",
+    "web3": "^1.7.4",
+    "web3-utils": "^1.7.4"
   },
   "name": "car",
   "description": "Create a decentralize car sharing protocol. This project will allow a company or a person to share his car to another entity.",

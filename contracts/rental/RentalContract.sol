@@ -5,8 +5,9 @@ import "./RentalFinalization.sol";
 
 contract RentalContract is RentalFinalization {
 
-    constructor(address addr) {
-        carFactory = CarFactory(addr);
+    constructor(address verifierContractAddress, address carFactoryAddress) {
+        verifier = Verifier(verifierContractAddress);
+        carFactory = CarFactory(carFactoryAddress);
     }
 
 }

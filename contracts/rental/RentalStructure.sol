@@ -5,6 +5,7 @@ import "../Route.sol";
 import "../CarFactory.sol";
 import "../Verifier.sol";
 
+
 abstract contract RentalStructure {
 
     /**
@@ -58,7 +59,6 @@ abstract contract RentalStructure {
 
 
         // TODO :: Reorganize variables + modify the test 
-        
 
         bool returnCarOwner;
         bool returnCarClient;

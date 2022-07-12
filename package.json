@@ -12,6 +12,7 @@
     "doc": "doc",
     "test": "test"
   },
+  "devDependencies": {},
   "scripts": {
     "test": "truffle test"
   },

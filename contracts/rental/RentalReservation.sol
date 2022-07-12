@@ -38,7 +38,7 @@ abstract contract RentalReservation is RentalProposition {
             bytes32 secret_hash = sha256(secret);
             if (rentContract[rentContractId].proofOfExchange.clientSecretRentCar == secret_hash) {
                 rentContract[rentContractId].proofOfExchange.ownerAcceptExchange = true;
-            }            
+            }
         } 
 
         // The client accept the exchange

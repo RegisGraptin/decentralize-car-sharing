@@ -22,7 +22,7 @@ abstract contract RentalProposition is RentalStructure {
         require(msg.sender == client);
 
         // Check the address of the car owner
-        require(carFactory.carToOwner(carId) == carOwner);
+        require(carHelper.carToOwner(carId) == carOwner);
 
         // TODO :: Check using the Verifier that the owner/car/client are valid.
 
